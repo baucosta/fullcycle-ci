@@ -3,7 +3,11 @@ on: [push, pull_request]
 jobs:
     build:
         runs-on: ubuntu-latest
+        strategy:
+            matrix:
+              node: [ '10', '12' ]
+        name: Node ${{ matrix.node }} sample
         steps:
             - uses: actions/checkout@v2
-            - run: cd ../../
-            - run: npm test
+            - run: npm install
+            - run: npm run test
